@@ -1,0 +1,33 @@
+pote,time,pais,fase_pre
+1,Flamengo,BRA,False
+1,Palmeiras,BRA,False
+1,Boca Juniors,ARG,False
+1,Peñarol,URU,False
+1,Nacional,URU,False
+1,Liga de Quito,ECU,False
+1,Fluminense,BRA,False
+1,Independiente del Valle,ECU,False
+2,Lanús,ARG,False
+2,Libertad,PAR,False
+2,Estudiantes de La Plata,ARG,False
+2,Cerro Porteño,PAR,False
+2,Corinthians,BRA,False
+2,Bolívar,BOL,False
+2,Cruzeiro,BRA,False
+2,Universitario,PER,False
+3,Junior,COL,False
+3,Universidad Católica,CHI,False
+3,Rosario Central,ARG,False
+3,Santa Fe,COL,False
+3,Always Ready,BOL,False
+3,Coquimbo Unido,CHI,False
+3,Deportivo La Guaira,VEN,False
+3,Cusco,PER,False
+4,Universidad Central,VEN,False
+4,Platense,ARG,False
+4,Independiente Rivadavia,ARG,False
+4,Mirassol,BRA,False
+4,Independiente Medellín,COL,True
+4,Deportes Tolima,COL,True
+4,Sporting Cristal,PER,True
+4,Barcelona,ECU,True

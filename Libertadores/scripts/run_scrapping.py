@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
 
+from pathlib import Path
+
 import requests
 import pandas as pd
 import re
+
 
 html = requests.get("https://gol.conmebol.com/libertadores/es/news/sorteo-de-la-fase-de-grupos-de-la-conmebol-libertadores-2026-fecha-horario-clasificados").content
 
@@ -77,8 +80,8 @@ for linha in linhas:
 
 #cria o dataframe
 df = pd.DataFrame(registros, columns=["pote", "time", "pais", "fase_pre"])
-
-print(df)
+caminho = Path(r"C:\Users\wiul\Documents\Projetos\Continental-Group-Draw\Libertadores\data\processed")
+df.to_csv(caminho /"times_por_pote_LA_2026.csv", na_rep="None", index=False)
 
 
 
