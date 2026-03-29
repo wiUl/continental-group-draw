@@ -28,35 +28,48 @@ def inicialização():
     return grupos, pote1, pote2, pote3, pote4, lista_pendentes
 
 def alocar_times_em_grupo(grupos, times, ordem_grupos):
-    while(times):
-        
-        index = random.randint(0, len(times) -1)
-        sorteado = times.pop(index)
-        print(f"\nSorteado: {sorteado[1]}")  # ← debug
-        alocado = False  # ← flag de controle
+    times_ordenados = times[:]
+    random.shuffle(times_ordenados)
 
-        for chave in ordem_grupos:
+    grupos_iniciais = ordem_grupos[:]
+
+    def backtrack(idx, grupos_restantes):
+        if idx == len(times_ordenados):
+            return True
+
+        sorteado = times_ordenados[idx]
+        print(f"\nSorteado: {sorteado[1]}")
+
+        for i, chave in enumerate(grupos_restantes):
             if pode_adicionar(grupos, chave, sorteado):
                 adicionar_time(grupos, chave, sorteado)
-                ordem_grupos.remove(chave)
-                print(f"  → Alocado no Grupo {chave}")  # ← debug
-                alocado = True
-                break
+                print(f"  → Tentando Grupo {chave}")
 
-    lista_pendentes = list(grupos.keys())
+                novos_grupos_restantes = grupos_restantes[:]
+                novos_grupos_restantes.pop(i)
 
-    if not alocado:  # ← se nenhum grupo aceitou
-            print(f"  ⚠️ NÃO FOI ALOCADO: {sorteado[1]}")
-    
-    return grupos, lista_pendentes
+                if backtrack(idx + 1, novos_grupos_restantes):
+                    return True
+
+                remover_time(grupos, chave, sorteado)
+                print(f"  ↩ Backtracking: removido do Grupo {chave}")
+
+        return False
+
+    sucesso = backtrack(0, grupos_iniciais)
+
+    if not sucesso:
+        print("\n Não foi possível alocar todos os times deste pote.")
+
+    return grupos, list(grupos.keys()), sucesso
 
         
 grupos, timesP1, timesP2, timesP3, timesP4, lista_pendentes = inicialização()
 
-grupos, lista_pendentes = alocar_times_em_grupo(grupos, timesP1, lista_pendentes)
-grupos, lista_pendentes = alocar_times_em_grupo(grupos, timesP2, lista_pendentes)
-grupos, lista_pendentes = alocar_times_em_grupo(grupos, timesP3, lista_pendentes)
-grupos, lista_pendentes = alocar_times_em_grupo(grupos, timesP4, lista_pendentes)
+grupos, lista_pendentes, flag1 = alocar_times_em_grupo(grupos, timesP1, lista_pendentes)
+grupos, lista_pendentes, flag2 = alocar_times_em_grupo(grupos, timesP2, lista_pendentes)
+grupos, lista_pendentes, flag3 = alocar_times_em_grupo(grupos, timesP3, lista_pendentes)
+grupos, lista_pendentes, flag4 = alocar_times_em_grupo(grupos, timesP4, lista_pendentes)
 
 """print(listar_times(grupos, "A"))
 print(listar_times(grupos, "B"))

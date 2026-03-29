@@ -18,7 +18,7 @@ def mesmo_pote(grupos, chave, time_info):
     pote = time_info[0]
     
     for time in grupos[chave]:
-        if pote in time:
+        if time[0] == pote:
             return True
     
     return False

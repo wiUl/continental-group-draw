@@ -15,6 +15,10 @@ def criar_grupos():
 def adicionar_time(grupos, chave, valor):
     if valor not in grupos[chave]:
         grupos[chave].append(valor)
+
+def remover_time(grupos, chave, valor):
+    if valor in grupos[chave]:
+        grupos[chave].remove(valor)
     
 def listar_times(grupos, chave):
     lista_times = []
